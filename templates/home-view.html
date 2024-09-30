@@ -3,7 +3,11 @@
 
 {% block content %}
     <h1>Welcome to a new Django project</h1>
-    <h2>{{ id }} || {{ title }}</h2>
-    <p>{{ content }}!</p>
+
+    
+    {% for article in articles %}
+        <a href="{% url 'article-by-id' id=article.id %}"><h2>{{ article.id }} || {{ article.title }}</h2></a>
+        <!-- <p>{{ article.content }}!</p> -->
+    {% endfor %}
 {% endblock content %}
     

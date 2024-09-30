@@ -12,6 +12,12 @@
     </title>
 </head>
 <body>
+    <header>
+        <a href="{% url 'home-view' %}">Home</a>
+        <a href="{% url 'create-article' %}">Create Article</a>
+        <a href="{% url 'user-login' %}">Login</a>
+        <a href="{% url 'user-register' %}">Sign Up</a>
+    </header>
     
     {% block content %}
         
