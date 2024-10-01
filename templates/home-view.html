@@ -2,11 +2,13 @@
 
 
 {% block content %}
-    <h1>Welcome to a new Django project</h1>
+    <h1>Hello there! This is just HTML with Django. I did not create styling as I was learning!</h1>
 
     
     {% for article in articles %}
-        <a href="{% url 'article-by-id' id=article.id %}"><h2>{{ article.id }} || {{ article.title }}</h2></a>
+        <ul>
+            <a href="{% url 'article-by-id' id=article.id %}"><li>{{ article.id }} || {{ article.title }}</li></a>
+        </ul>
         <!-- <p>{{ article.content }}!</p> -->
     {% endfor %}
 {% endblock content %}

@@ -1,12 +1,10 @@
-from lib2to3.fixes.fix_input import context
-
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.template.defaultfilters import title
-
+from django.contrib.auth.decorators import login_required
 from .models import Articles
+from .form import ArticleForm
 
 # Create your views here.
+
 
 def home_view(request):
     article_obj = Articles.objects.all()
@@ -16,6 +14,8 @@ def home_view(request):
     }
     return render(request, 'home-view.html', context)
 
+
+@login_required
 def one_Article(request, id):
 
     article = Articles.objects.get(id=id)
@@ -26,18 +26,23 @@ def one_Article(request, id):
 
     return render(request, 'articles.html', context)
 
-
+@login_required
 def article_create_view(request):
-    print(request.POST)
     article = Articles()
-    if request.method == 'POST':
-        title = request.POST.get('title')
-        content = request.POST.get('content')
-        article = Articles.objects.create(title=title, content=content)
+    form = ArticleForm(request.POST or None)
+    # print(dir(form))
+
+    if form.is_valid():
+        article = form.save()
+        # title = form.cleaned_data.get('title')
+        # content = form.cleaned_data.get('content')
+        # article = Articles.objects.create(title=title, content=content)
+
 
     context = {
         'article': article,
-        'created': True
+        'created': True,
+        'form': form
     }
 
     return render(request, 'create_article.html', context)

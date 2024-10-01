@@ -4,16 +4,10 @@
 {% block content %}
 
     <h1>Creating an Article</h1>
-    
 
     <form action="{% url 'create-article' %}" method="post">
         {% csrf_token %}
-        <div>
-            <input type="text" name="title" placeholder="title">
-        </div>
-        <div style="margin-top: 10px;">
-            <textarea name="content" placeholder="content"></textarea>
-        </div>
+        {{ form.as_p }}
         <div style="margin: 10px;"></div>
             <input type="submit" value="Create Article">
         </div>
@@ -25,12 +19,5 @@
         <a href="{% url 'create-article' %}">{{ article.title }}</a>
         
     {% endif %}
-        
-   
-        
-    
-        
-    
-    
 
 {% endblock content %}
